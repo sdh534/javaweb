@@ -22,8 +22,8 @@
     	newText += '<table class="table" width="100%">';
     	newText += '<tr>';
     	newText += '<td><input type="text" name="product" id="product'+idx+'" /></td>';
-    	newText += '<td><input type="number" name="price" id="price'+idx+'" /></td>';
-    	newText += '<td><input type="number" name="su" id="su'+idx+'" /></td>';
+    	newText += '<td><input type="number" name="price" id="price'+idx+'" style="width:100px"/></td>';
+    	newText += '<td><input type="number" name="su" id="su'+idx+'" style="width:60px"/></td>';
     	newText += '<td><input type="button" value="삭제" onclick="deleteBox('+idx+')" class="btn btn-secondary" /></td>';
     	newText += '</tr>';
     	newText += '</table>';
@@ -114,9 +114,9 @@
           <table class="table">
             <tr>
               <td><input type="text" name="product" id="product0" value="냉장고" /></td>
-              <td><input type="number" name="price" id="price0" value="50000" /></td>
-              <td><input type="number" name="su" id="su0" value="1" /></td>
-              <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td>
+              <td><input type="number" name="price" id="price0" value="50000" style="width:100px" /></td>
+              <td><input type="number" name="su" id="su0" value="1" style="width:60px"/></td>
+              <td width="100px"></td>
             </tr>
           </table>
           <div id="demo"></div>
