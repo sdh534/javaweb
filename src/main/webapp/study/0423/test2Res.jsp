@@ -21,7 +21,7 @@
   <p>평균 : ${vo.avg}</p>
   <p>학점 : ${vo.grade}</p>
   <hr/>
-  <p><a href="<%=request.getContextPath()%>/study/0423/test1.jsp" class="btn btn-secondary">돌아가기</a></p>
+  <p><a href="test1.jsp" class="btn btn-secondary">돌아가기</a></p>
 </div>
 <p><br/></p>
 </body>
