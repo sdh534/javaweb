@@ -28,8 +28,8 @@
 <jsp:include page="/include/header.jsp" />
 <p><br/></p>
 <div class="container">
-  <h2>회원가입</h2>
-  <form name="myform" method="post" action="${ctp}/database/JoinOk">
+  <h2>회원가입2</h2>
+  <form name="myform" method="post" action="${ctp}/JoinOk.re">
   	<table class="table text-center">
   	  <tr>
   	    <th>아이디</th>
@@ -48,7 +48,7 @@
   	      <!-- <input type="button" value="회원가입" onclick="fCheck()" class="btn btn-success mr-2"/> -->
   	      <input type="submit" value="회원가입" class="btn btn-success mr-2"/>
   	      <input type="reset" value="다시입력" class="btn btn-danger mr-2"/>
-  	      <input type="button" value="돌아가기" onclick="location.href='${ctp}/study/0428_database/login.jsp';" class="btn btn-warning"/>
+  	      <input type="button" value="돌아가기" onclick="location.href='${ctp}/Login.re';" class="btn btn-warning"/>
   	    </td>
   	  </tr>
   	</table>
