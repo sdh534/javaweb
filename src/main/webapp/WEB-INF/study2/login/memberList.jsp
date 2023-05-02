@@ -44,7 +44,7 @@
   </table>
   <br/>
   <div>
-    <a href="${ctp}/study/0428_database/MemberMain.re" class="btn btn-success">돌아가기</a>
+    <a href="${ctp}/study/0428_database/memberMain.jsp" class="btn btn-success">돌아가기</a>
   </div>
 </div>
 <p><br/></p>
