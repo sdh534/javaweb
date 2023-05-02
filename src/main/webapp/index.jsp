@@ -7,6 +7,7 @@
 	<meta charset="UTF-8">
 	<title>javaweb 프로젝트</title>
 	<jsp:include page="/include/bs4.jsp" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
   .fakeimg {
     height: 200px;

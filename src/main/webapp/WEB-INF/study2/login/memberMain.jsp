@@ -10,6 +10,7 @@
   <meta charset="UTF-8">
   <title>memberMain.jsp</title>
   <jsp:include page="/include/bs4.jsp" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
   <script>
     'use strict';
     
