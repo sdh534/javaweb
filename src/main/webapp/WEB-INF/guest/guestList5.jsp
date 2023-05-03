@@ -113,18 +113,18 @@
 		<br/> 	<!-- 4 페이지(1블록)에서 0블록으로 이동하게 되면-> 1페이지가 0블록의 시작페이지 -->
 		<!-- 블록 페이징 처리 - 이후 회원 리스트 처리해보기 -->
 		<!-- 이전블록/ 1(4) 2(5) 3(6) /다음블록  -->
-	<div class="text-center">
-	  <ul class="pagination justify-content-center">
-	    <c:if test="${pag > 1}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/GuestList.gu?pageSize=${pageSize}&pag=1">첫페이지</a></li></c:if>
-	    <c:if test="${curBlock > 0}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/GuestList.gu?pageSize=${pageSize}&pag=${(curBlock-1)*blockSize + 1}">이전블록</a></li></c:if>
-	    <c:forEach var="i" begin="${curBlock*blockSize + 1}" end="${curBlock*blockSize + blockSize}" varStatus="st">
-	      <c:if test="${i <= totPage && i == pag}"><li class="page-item active"><a class="page-link text-white bg-secondary border-secondary" href="${ctp}/GuestList.gu?pageSize=${pageSize}&pag=${i}">${i}</a></li></c:if>
-	      <c:if test="${i <= totPage && i != pag}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/GuestList.gu?pageSize=${pageSize}&pag=${i}">${i}</a></li></c:if>
-	    </c:forEach>
-	    <c:if test="${curBlock < lastBlock}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/GuestList.gu?pageSize=${pageSize}&pag=${(curBlock+1)*blockSize + 1}">다음블록</a></li></c:if>
-	    <c:if test="${pag < totPage}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/GuestList.gu?pageSize=${pageSize}&pag=${totPage}">마지막페이지</a></li></c:if>
-	  </ul>
-  </div>
+		<div class="text-center">
+		
+			<c:if test="${pag > 1}"> [ <a href="${ctp}/GuestList.gu?pageSize=${pageSize}&pag=1">첫페이지</a> ] </c:if>
+			<c:if test="${curBlock > 0}">[<a href="${ctp}/GuestList.gu?pageSize=${pageSize}&pag=${(curBlock-1)*blockSize+1}">이전블록</a>]</c:if>
+			<c:forEach var="i" begin="${curBlock*blockSize+1}" end="${curBlock*blockSize+blockSize}" varStatus="st">
+				<c:if test="${i <= totPage && i==pag}">[<font color="red">${i}</font>]</c:if>
+				<c:if test="${i <= totPage && i!=pag}">	[<a href="${ctp}/GuestList.gu?pageSize=${pageSize}&pag=${i}">${i}</a>]</c:if>
+			
+			</c:forEach>
+			<c:if test="${curBlock < lastBlock}">[<a href="${ctp}/GuestList.gu?pageSize=${pageSize}&pag=${(curBlock+1)*blockSize+1}">다음블록</a>]</c:if>
+			<c:if test="${pag < totPage}"> [<a href="${ctp}/GuestList.gu?pageSize=${pageSize}&pag=${totPage}">마지막 페이지</a> ] </c:if>
+		</div>
 	</div>
 	<p><br/></p>
 <jsp:include page="/include/footer.jsp"/>
