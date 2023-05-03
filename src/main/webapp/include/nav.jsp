@@ -11,7 +11,7 @@
         <a class="nav-link" href="${pageContext.request.contextPath}/GuestList.gu">Guest</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Board</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/BoardList.bo">Board</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">PDS</a>
@@ -25,6 +25,7 @@
 			      <a class="dropdown-item" href="${pageContext.request.contextPath}/mapping/Test5.do">URL 매핑(확장자 패턴)</a>
 			      <a class="dropdown-item" href="${pageContext.request.contextPath}/mapping2/Test5.mi">URL 매핑(확장자 패턴)</a>
 			      <a class="dropdown-item" href="${pageContext.request.contextPath}/mapping2/Login.re">로그인연습 2</a>
+			      <a class="dropdown-item" href="${pageContext.request.contextPath}/mapping2/Password.st">암호화 연습</a>
 			    </div>
 			  </div>  
       </li>   

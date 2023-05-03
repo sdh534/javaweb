@@ -38,13 +38,13 @@
       <td class="text-right">
         <!-- 첫페이지 / 이전페이지 / (현재페이지번호/총페이지수) / 다음페이지 / 마지막페이지 -->
         <c:if test="${pag > 1}">
-          <a href="${ctp}/List.re?pageSize=${pageSize}&pag=1" title="첫페이지로">◁◁</a>
-          <a href="${ctp}/List.re?pageSize=${pageSize}&pag=${pag-1}" title="이전페이지로">◀</a>
+          <a href="${ctp}/BoardList.bo?pageSize=${pageSize}&pag=1" title="첫페이지로">◁◁</a>
+          <a href="${ctp}/BoardList.bo?pageSize=${pageSize}&pag=${pag-1}" title="이전페이지로">◀</a>
         </c:if>
         ${pag}/${totPage}
         <c:if test="${pag < totPage}">
-          <a href="${ctp}/List.re?pageSize=${pageSize}&pag=${pag+1}" title="다음페이지로">▶</a>
-          <a href="${ctp}/List.re?pageSize=${pageSize}&pag=${totPage}" title="마지막페이지로">▷▷</a>
+          <a href="${ctp}/BoardList.bo?pageSize=${pageSize}&pag=${pag+1}" title="다음페이지로">▶</a>
+          <a href="${ctp}/BoardList.bo?pageSize=${pageSize}&pag=${totPage}" title="마지막페이지로">▷▷</a>
         </c:if>
       </td>
     </tr>
@@ -83,14 +83,14 @@
   <br/>
   <!-- 블록페이징처리 -->
   <div class="text-center">
-    <c:if test="${pag > 1}">[<a href="${ctp}/List.re?pageSize=${pageSize}&pag=1">첫페이지</a>]</c:if>
-    <c:if test="${curBlock > 0}">[<a href="${ctp}/List.re?pageSize=${pageSize}&pag=${(curBlock-1)*blockSize + 1}">이전블록</a>]</c:if>
+    <c:if test="${pag > 1}">[<a href="${ctp}/BoardList.bo?pageSize=${pageSize}&pag=1">첫페이지</a>]</c:if>
+    <c:if test="${curBlock > 0}">[<a href="${ctp}/BoardList.bo?pageSize=${pageSize}&pag=${(curBlock-1)*blockSize + 1}">이전블록</a>]</c:if>
     <c:forEach var="i" begin="${curBlock*blockSize + 1}" end="${curBlock*blockSize + blockSize}" varStatus="st">
       <c:if test="${i <= totPage && i == pag}">[<font color="red">${i}</font>]</c:if>
-      <c:if test="${i <= totPage && i != pag}">[<a href="${ctp}/List.re?pageSize=${pageSize}&pag=${i}">${i}</a>]</c:if>
+      <c:if test="${i <= totPage && i != pag}">[<a href="${ctp}/BoardList.bo?pageSize=${pageSize}&pag=${i}">${i}</a>]</c:if>
     </c:forEach>
-    <c:if test="${curBlock < lastBlock}">[<a href="${ctp}/List.re?pageSize=${pageSize}&pag=${(curBlock+1)*blockSize + 1}">다음블록</a>]</c:if>
-    <c:if test="${pag < totPage}">[<a href="${ctp}/List.re?pageSize=${pageSize}&pag=${totPage}">마지막페이지</a>]</c:if>
+    <c:if test="${curBlock < lastBlock}">[<a href="${ctp}/BoardList.bo?pageSize=${pageSize}&pag=${(curBlock+1)*blockSize + 1}">다음블록</a>]</c:if>
+    <c:if test="${pag < totPage}">[<a href="${ctp}/BoardList.bo?pageSize=${pageSize}&pag=${totPage}">마지막페이지</a>]</c:if>
   </div>
 </div>
 <p><br/></p>
