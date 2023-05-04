@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="ctp" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
@@ -15,7 +16,12 @@
     	let pageSize = document.getElementById("pageSize").value;
     	location.href = "${ctp}/BoardList.bo?pag=${pag}&pageSize="+pageSize;
     }
+    
   </script>
+  
+  <style>
+	 
+  </style>
 </head>
 <body>
 <jsp:include page="/include/header.jsp" />
@@ -61,9 +67,25 @@
     <c:forEach var="vo" items="${vos}" varStatus="st">
       <tr>
         <td>${vo.idx}</td>
-        <td>${vo.title}</td>
-        <td>${vo.nickName}</td>
-        <td>${vo.wDate}</td>
+        <td>
+        ${vo.title}
+        <c:if test="${vo.hour_diff <= 24}"><span class="badge badge-danger text-white">NEW!</span></c:if>
+        </td>
+        <td>${vo.mid}</td>
+        <!-- 1일(24시간)이내는 시간만 표시, 이후로는 날짜와 시간만 -->
+        <td>
+	        <c:if test="${vo.hour_diff <= 24 && vo.day_diff==0}">
+	       		${fn:substring(vo.wDate,11,16)}
+	        </c:if>
+	        <c:if test="${vo.day_diff != 0}">
+	        	<c:if test="${vo.hour_diff <=24 }">
+	        		${fn:substring(vo.wDate,0,16)}
+	        	</c:if>
+	        	<c:if test="${vo.hour_diff >24 }">
+	        		${fn:substring(vo.wDate,0,10)}
+	        	</c:if>
+	        </c:if>
+        </td>
         <td>${vo.readNum}</td>
         <td>${vo.good}</td>
       </tr>

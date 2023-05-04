@@ -16,12 +16,15 @@ public class BoardInputOkCommand implements BoardInterface {
 		String mid = session.getAttribute("sMid")==null ? "" :  (String) session.getAttribute("sMid");;
 		String nickName = session.getAttribute("nickName")==null ? "" :  (String) session.getAttribute("nickName");
 		
-		
+		//제목에 태그 금지하도록 설정하기
 		String title = request.getParameter("title")==null ? "" :  request.getParameter("title");
 		String content = request.getParameter("content")==null ? "" :  request.getParameter("content");
 		String email = request.getParameter("email")==null ? "" :  request.getParameter("email");
 		String homePage = request.getParameter("homePage")==null ? "" :  request.getParameter("homePage");
 		String hostIp = request.getParameter("hostIp")==null ? "" :  request.getParameter("hostIp");
+		
+		title = title.replace("<", "&lt;");
+		title = title.replace(">", "&gt;");
 		
 		BoardVO vo = new BoardVO();
 		vo.setMid(mid);
@@ -34,6 +37,7 @@ public class BoardInputOkCommand implements BoardInterface {
 		
 		BoardDAO dao = new BoardDAO();
 		int res = dao.setBoardInputOk(vo);
+		
 		
 		if(res == 1) {
 			request.setAttribute("msg", "게시글이 등록되었습니다.");
