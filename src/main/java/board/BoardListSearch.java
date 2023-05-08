@@ -14,15 +14,14 @@ public class BoardListSearch implements BoardInterface {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BoardDAO dao = new BoardDAO();
 		String mid = request.getParameter("mid");
-		
+		System.out.println(mid);
 		
 		// 페이징처리...
     int pag = request.getParameter("pag")==null ? 1: Integer.parseInt(request.getParameter("pag")); 
     int pageSize = request.getParameter("pageSize")==null ? 3: Integer.parseInt(request.getParameter("pageSize")); 
-    int totRecCnt = dao.getTotRecCnt();
+    int totRecCnt = request.getParameter("writeNum")==null ? 0: Integer.parseInt(request.getParameter("writeNum")); ;
     int totPage = (totRecCnt % pageSize)==0 ? totRecCnt/pageSize :  totRecCnt/pageSize + 1;
     int startIndexNo = (pag - 1) * pageSize;
-//    int screenNo = totRecCnt - startIndex;
     ArrayList<BoardVO> vos = dao.getBoardListSearch(startIndexNo, pageSize, mid);
     
    

@@ -187,13 +187,14 @@ public class BoardDAO {
 		ArrayList<BoardVO> vos = new ArrayList<>();
 		try {
 //			sql = "select * from board order by idx desc limit ?, ?";
-			sql = "select * from board where mid=? order by idx desc limit ?,?";
+			sql = "select *, datediff(now(), wDate) as day_diff, timestampdiff(hour, wDate, now()) as hour_diff "
+					+ "from board where mid=? order by idx desc limit ?,?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, startIndexNo);
-			pstmt.setInt(2, pageSize);
-			pstmt.setString(3, mid);
+			pstmt.setString(1, mid);
+			pstmt.setInt(2, startIndexNo);
+			pstmt.setInt(3, pageSize);
 			rs = pstmt.executeQuery();
-			
+			System.out.println(mid);
 			while(rs.next()) {
 				vo = new BoardVO();
 				vo.setIdx(rs.getInt("idx"));

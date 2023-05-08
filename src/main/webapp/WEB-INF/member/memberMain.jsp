@@ -21,7 +21,7 @@
     <p>총 방문횟수 : ${visitCnt}</p>
     <p>오늘 방문횟수 : ${todayCnt}</p>
     <p>회원사진 : <img src="${ctp}/images/member/${photo}" width="200px"/></p>
-    <p>작성한 글 수 : ${writeNum} <a href="${ctp}/BoardListSearch.bo?mid=${sMid}">작성한 글 보러가기</a></p>
+    <p>작성한 글 수 : ${writeNum} <a href="${ctp}/BoardListSearch.bo?mid=${sMid}&writeNum=${writeNum}">작성한 글 보러가기</a></p>
     <p></p>
   </div>
 </div>

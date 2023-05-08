@@ -46,7 +46,7 @@ public class BoardController extends HttpServlet {
 			viewPage += "/boardContent.jsp";
 		}
 		else if(com.equals("/BoardListSearch")) {
-			command = new BoardGoodCheckCommand();
+			command = new BoardListSearch();
 			command.execute(request, response);
 			viewPage += "/boardList.jsp";
 		}
