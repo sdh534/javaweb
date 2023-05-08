@@ -21,6 +21,8 @@ public class MemberController extends HttpServlet {
 		String com = uri.substring(uri.lastIndexOf("/"),uri.lastIndexOf("."));
 		
 		if(com.equals("/MemberLogin")) {
+			command = new MemberLoginCommand();
+			command.execute(request, response);
 			viewPage += "/memberLogin.jsp";
 		}
 		else if(com.equals("/MemberLoginOk")) {
@@ -41,10 +43,25 @@ public class MemberController extends HttpServlet {
 			command.execute(request, response);
 			viewPage += "/memberIdCheck.jsp";
 		}
+		else if(com.equals("/MemberNickCheck")) {
+			command = new MemberNickCheckCommand();
+			command.execute(request, response);
+			viewPage += "/memberNickCheck.jsp";
+		}
+		else if(com.equals("/MemberMain")) {
+			command = new MemberMainCommand();
+			command.execute(request, response);
+			viewPage += "/memberMain.jsp";
+		}
 		else if(com.equals("/MemberList")) {
 			command = new MemberListCommand();
 			command.execute(request, response);
 			viewPage += "/memberList.jsp";
+		}
+		else if(com.equals("/MemberLogout")) {
+			command = new MemberLogoutCommand();
+			command.execute(request, response);
+			viewPage = "/include/message.jsp";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);

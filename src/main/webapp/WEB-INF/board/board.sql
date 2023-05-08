@@ -68,3 +68,8 @@ select *, timestampdiff(hour, wDate, now()) as hour_diff from board order by idx
 
 /* 날짜 양식 date_format() : 년(%Y), 월(%m) 일(%d) */
 select date_format(wDate, '%Y-%m-%d %H:%i') as hour_diff from board;
+
+
+select count(*)as cnt from board where (mid='hkd1234' or nickName='관리맨');
+
+select * from board where mid='hkd1234' order by idx desc;

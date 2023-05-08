@@ -101,7 +101,126 @@ public class BoardDAO {
 		}
 		return totRecCnt;
 	}
+
+	//게시글 1건 가져오기 
+	public BoardVO getBoardContent(int idx) {
+		BoardVO vo = new BoardVO();
+		try {
+			sql = "select * from board where idx=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			rs = pstmt.executeQuery();
+			rs.next();
+			
+			vo.setIdx(rs.getInt("idx"));
+			vo.setMid(rs.getString("mid"));
+			vo.setNickName(rs.getString("nickName"));
+			vo.setTitle(rs.getString("title"));
+			vo.setEmail(rs.getString("email"));
+			vo.setHomePage(rs.getString("homePage"));
+			vo.setContent(rs.getString("content"));
+			vo.setReadNum(rs.getInt("readNum"));
+			vo.setHostIp(rs.getString("hostIp"));
+			vo.setOpenSw(rs.getString("openSw"));
+			vo.setwDate(rs.getString("wDate"));
+			vo.setGood(rs.getInt("good"));
+			
+		}catch (SQLException e) {
+			System.out.println("SQL 오류 : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		
+		return vo;
+	}
+
+	//조회수
+	public void setReadNumUpdate(int idx) {
+		try {
+			sql = "update board set readNum = readNum+1 where idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			getConn.pstmtClose();
+		}
+	}
+	//좋아요 
+	public void setGoodUpdate(int idx) {
+		try {
+			sql = "update board set good = good+1 where idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			getConn.pstmtClose();
+		}
+		
+	}
+
+	public int getWriteNum(String mid, String nickName) {
+		int res = 0;
+		try {
+			sql = "select count(*) as cnt from board where (mid=? or nickName=?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			pstmt.setString(2, nickName);
+			rs = pstmt.executeQuery();
+			rs.next();
+			
+			res = rs.getInt("cnt");
+		}catch (SQLException e) {
+			System.out.println("SQL 오류 : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return res;
+	}
+
+	public ArrayList<BoardVO> getBoardListSearch(int startIndexNo, int pageSize, String mid) {
+		ArrayList<BoardVO> vos = new ArrayList<>();
+		try {
+//			sql = "select * from board order by idx desc limit ?, ?";
+			sql = "select * from board where mid=? order by idx desc limit ?,?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startIndexNo);
+			pstmt.setInt(2, pageSize);
+			pstmt.setString(3, mid);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				vo = new BoardVO();
+				vo.setIdx(rs.getInt("idx"));
+				vo.setMid(rs.getString("mid"));
+				vo.setNickName(rs.getString("nickName"));
+				vo.setTitle(rs.getString("title"));
+				vo.setEmail(rs.getString("email"));
+				vo.setHomePage(rs.getString("homePage"));
+				vo.setContent(rs.getString("content"));
+				vo.setReadNum(rs.getInt("readNum"));
+				vo.setHostIp(rs.getString("hostIp"));
+				vo.setOpenSw(rs.getString("openSw"));
+				vo.setwDate(rs.getString("wDate"));
+				vo.setGood(rs.getInt("good"));
+				
+				vo.setHour_diff(rs.getInt("hour_diff"));
+				vo.setDay_diff(rs.getInt("day_diff"));
+				
+				vos.add(vo);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 오류 : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return vos;
+	}
 	
-	//최신글에만 NEW를 띄워보자 
 	
 }

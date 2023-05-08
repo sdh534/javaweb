@@ -68,7 +68,7 @@
       <tr>
         <td>${vo.idx}</td>
         <td>
-        ${vo.title}
+        <a href="${ctp}/BoardContent.bo?idx=${vo.idx}">${vo.title}</a>
         <c:if test="${vo.hour_diff <= 24}"><span class="badge badge-danger text-white">NEW!</span></c:if>
         </td>
         <td>${vo.mid}</td>

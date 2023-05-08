@@ -24,6 +24,7 @@ create table member(
 	startDate datetime default now(),/* 최초가입일 */
 	lastDate datetime default now(), /* 마지막 접속일 */
 	todayCnt int default 0, 				 /* 오늘 방문횟수 */
+	salt char(8) not null, 					 /* 비밀번호 보안을 위한 해시키 */
 	primary key (idx, mid) 					 /* 주키: idx(고유번호), mid(회원고유아이디) */
 );
 

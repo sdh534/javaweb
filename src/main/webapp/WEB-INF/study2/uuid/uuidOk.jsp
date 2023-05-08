@@ -13,7 +13,8 @@
 <jsp:include page="/include/header.jsp"/>
 	<p><br/></p>
 	<div class="container">
-		
+		<p>출력결과 : ${uid}</p>
+		<p><a href="" class="btn btn-primary"> 돌아가기 </a></p>
 	</div>
 	<p><br/></p>
 <jsp:include page="/include/footer.jsp"/>
