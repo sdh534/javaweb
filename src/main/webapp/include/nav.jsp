@@ -36,6 +36,8 @@
 				      <a class="dropdown-item" href="${pageContext.request.contextPath}/mapping2/Login.re">로그인연습 2</a>
 				      <a class="dropdown-item" href="${pageContext.request.contextPath}/mapping2/Password.st">암호화 연습</a>
 				      <a class="dropdown-item" href="${pageContext.request.contextPath}/mapping2/UuidForm.st">UUID 연습</a>
+				      <a class="dropdown-item" href="${pageContext.request.contextPath}/AjaxTest1">Ajax 연습1</a>
+				      <a class="dropdown-item" href="${pageContext.request.contextPath}/UserList.st">Ajax 연습2</a>
 				    </div>
 				  </div>  
 	      </li>   

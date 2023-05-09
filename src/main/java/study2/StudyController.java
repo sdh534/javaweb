@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import study2.password.PassOk1Commond;
 import study2.password.PassOk2Commond;
+import study2.uuid.UuidCommand;
 
 @SuppressWarnings("serial")
 @WebServlet("*.st")
@@ -43,6 +44,34 @@ public class StudyController extends HttpServlet {
 			command = new UuidCommand();
 			command.execute(request, response);
 			viewPage += "/uuid/uuidOk.jsp";
+		}
+		else if(com.equals("/AjaxTest1")){
+			viewPage += "/ajax/ajaxTest1.jsp";
+		}
+		else if(com.equals("/UserList")){
+			command = new UserListCommand();
+			command.execute(request, response);
+			viewPage += "/ajax2/userList.jsp";
+		}
+		else if(com.equals("/UserInput")){
+			command = new UserInputCommand();
+			command.execute(request, response);
+			return; //백단에서 처리하고 끝내야함 
+		}
+		else if(com.equals("/UserDel")){
+			command = new UserDeleteCommand();
+			command.execute(request, response);
+			return; //백단에서 처리하고 끝내야함 
+		}
+		else if(com.equals("/UserSearch")){
+			command = new UserSearchCommand();
+			command.execute(request, response);
+			return; //백단에서 처리하고 끝내야함 
+		}
+		else if(com.equals("/UserUpdate")){
+			command = new UserUpdateCommand();
+			command.execute(request, response);
+			return; //백단에서 처리하고 끝내야함 
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);

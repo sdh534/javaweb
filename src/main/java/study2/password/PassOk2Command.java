@@ -1,4 +1,4 @@
-package study2;
+package study2.password;
 
 import java.io.IOException;
 
@@ -7,8 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import conn.SecurityUtil;
+import study2.StudyInterface;
 
-public class PassOk2Command implements StudyInteface {
+public class PassOk2Command implements StudyInterface {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
