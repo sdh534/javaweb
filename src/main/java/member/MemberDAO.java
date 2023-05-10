@@ -163,4 +163,25 @@ public class MemberDAO {
 			getConn.pstmtClose();
 		}
 	}
+
+  // 현재 로그인한 회원이 방명록에 올린 글의 개수 가져오기
+	public int getGuestWrite(String mid, String name, String nickName) {
+		int guestCnt = 0;
+		try {
+			// sql = "select count(*) as cnt from guest where name = ? or name = ? or name = ?";
+			sql = "select count(*) as cnt from guest where name in (?,?,?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			pstmt.setString(2, name);
+			pstmt.setString(3, nickName);
+			rs = pstmt.executeQuery();
+			rs.next();
+			guestCnt = rs.getInt("cnt");
+		} catch (SQLException e) {
+			System.out.println("SQL 에러 : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return guestCnt;
+	}
 }

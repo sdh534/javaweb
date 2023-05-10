@@ -26,14 +26,6 @@ public class MemberVO {
 	private int todayCnt;
 	private String salt;
 	
-	private int writeNum;
-	
-	public int getWriteNum() {
-		return writeNum;
-	}
-	public void setWriteNum(int writeNum) {
-		this.writeNum = writeNum;
-	}
 	public int getIdx() {
 		return idx;
 	}
@@ -185,7 +177,6 @@ public class MemberVO {
 				+ ", homePage=" + homePage + ", job=" + job + ", hobby=" + hobby + ", photo=" + photo + ", content=" + content
 				+ ", userInfor=" + userInfor + ", userDel=" + userDel + ", point=" + point + ", level=" + level + ", visitCnt="
 				+ visitCnt + ", startDate=" + startDate + ", lastDate=" + lastDate + ", todayCnt=" + todayCnt + ", salt=" + salt
-				+ ", writeNum=" + writeNum + "]";
+				+ "]";
 	}
-	
 }

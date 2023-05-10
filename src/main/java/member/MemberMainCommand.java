@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import board.BoardDAO;
-
 public class MemberMainCommand implements MemberInterface {
 
 	@Override
@@ -29,17 +27,15 @@ public class MemberMainCommand implements MemberInterface {
 		else if(vo.getLevel() == 3) strLevel = "우수회원";
 		else if(vo.getLevel() == 4) strLevel = "운영자";
 		
-	// 5 자신이 등록한 방명록 글 불러오기
-		
-		BoardDAO bdao = new BoardDAO();
-		int writeNum = bdao.getWriteNum(vo.getMid() ,vo.getNickName());
-		request.setAttribute("writeNum", writeNum);
-		
 		request.setAttribute("point", vo.getPoint());
 		request.setAttribute("todayCnt", vo.getTodayCnt());
 		request.setAttribute("visitCnt", vo.getVisitCnt());
 		request.setAttribute("strLevel", strLevel);
 		request.setAttribute("photo", vo.getPhoto());
+		
+		// 사용자가 방명록에서 글쓴 회수 가져오기.....
+		int guestCnt = dao.getGuestWrite(mid, vo.getName(), vo.getNickName());
+		request.setAttribute("guestCnt", guestCnt);
 	}
 
 }

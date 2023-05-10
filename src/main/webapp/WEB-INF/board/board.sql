@@ -73,3 +73,31 @@ select date_format(wDate, '%Y-%m-%d %H:%i') as hour_diff from board;
 select count(*)as cnt from board where (mid='hkd1234' or nickName='관리맨');
 
 select * from board where mid='hkd1234' order by idx desc;
+
+
+/* 이전 글 / 다음 글 가져오기 */
+select * from board;
+
+select * from board where idx=6;
+select idx, title from board where idx<6 order by idx desc limit 1;
+select idx, title from board where idx>6 limit 1;
+
+select * from board where content like '%안녕%';
+
+
+/* 게시판에 댓글달기 */
+create table boardReply(
+	idx int not null auto_increment,  /* 댓글 고유번호 */
+	boardIdx int not null,						/* 원본글의 고유번호 */
+	mid varchar(20) not null,					/* 댓글올린이 아이디 */
+	nickName varchar(20) not null, 		/* 댓글올린이 닉네임 */
+	wDate datetime default now(), 		/* 댓글 올린 날짜 */
+	hostIp varchar(50) not null, 			/* 댓글 올린 PC의 고유아이피 */
+	content text not null,	 					/* 댓글 내용 */
+	primary key(idx),									/* 기본키 : 고유번호 */
+	foreign key(boardIdx) references board(idx)	/* 외래키 설정 */ 
+	on update cascade
+	on delete restrict /* 원본에서 사용하는 키 지우기 제한 - 덧글 달려있으면 게시글 삭제 불가*/ 
+);
+
+desc boardReply;
