@@ -62,14 +62,18 @@
     <c:forEach var="vo" items="${vos}" varStatus="st">
       <tr>
         <td>${curScrStartNo}</td>
-        <td>
+        <td class="text-left">
           <c:if test="${vo.openSw == 'OK' || sLevel == 0 || sMid == vo.mid}">
-	          <a href="${ctp}/BoardContent.bo?idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}">${vo.title}</a>
+	          <a href="${ctp}/BoardContent.bo?idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}">
+	          ${vo.title}
+	          <c:if test="${vo.replyCount > 0}">(${vo.replyCount})</c:if>
+	          </a>
 	          <c:if test="${vo.hour_diff <= 24}"><img src="${ctp}/images/new.gif"/></c:if>
           </c:if>
           <c:if test="${vo.openSw != 'OK' && sLevel != 0 && sMid != vo.mid}">
           	${vo.title}
           </c:if>
+          	
         </td>
         <td>${vo.nickName}</td>
         <td>
