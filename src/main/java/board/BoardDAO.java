@@ -26,11 +26,9 @@ public class BoardDAO {
 			// sql = "select * from board order by idx desc limit ?,?";
 //			sql = "select *,datediff(wDate, now()) as day_diff,timestampdiff(hour, wDate, now()) as hour_diff from"
 //					+ " board order by idx desc limit ?,?";
-			sql = "select *, datediff(wDate, now()) as day_diff,timestampdiff(hour, wDate, now()) as hour_diff, "
+			sql = "select *, datediff(wDate, now()) as day_diff, timestampdiff(hour, wDate, now()) as hour_diff, "
 					+ "(select count(*) from boardReply where boardIdx=b.idx) as replyCount "
-					+ "from board b "
-					+ "order by idx desc "
-					+ "limit ?,?";
+					+ "from board b order by idx desc limit ?,?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, startIndexNo);
 			pstmt.setInt(2, pageSize);
@@ -55,6 +53,7 @@ public class BoardDAO {
 				vo.setDay_diff(rs.getInt("day_diff"));
 				
 				vo.setreplyCount(rs.getInt("replyCount"));
+				
 				vos.add(vo);
 			}
 		} catch (SQLException e) {
@@ -303,7 +302,7 @@ public class BoardDAO {
 		return res;
 	}
 
-	//부모글에 해당하는 댓글내역 가져오기 
+	// 부모글에 해당하는 댓글 내역 가져오기
 	public ArrayList<BoardReplyVO> getBoardReply(int idx) {
 		ArrayList<BoardReplyVO> replyVos = new ArrayList<>();
 		try {
@@ -315,7 +314,7 @@ public class BoardDAO {
 			while(rs.next()) {
 				BoardReplyVO replyVo = new BoardReplyVO();
 				replyVo.setIdx(rs.getInt("idx"));
-				replyVo.setBoardIdx(rs.getInt("boardIdx"));
+				replyVo.setBoardIdx(idx);
 				replyVo.setMid(rs.getString("mid"));
 				replyVo.setNickName(rs.getString("nickName"));
 				replyVo.setwDate(rs.getString("wDate"));
@@ -329,24 +328,85 @@ public class BoardDAO {
 		} finally {
 			getConn.rsClose();
 		}
-		
 		return replyVos;
 	}
 
+	// 댓글 삭제하기
 	public String setReplyDeleteOk(int replyIdx) {
 		String res = "0";
 		try {
-			sql = "delete from boardReply where idx = ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, replyIdx);
-			pstmt.executeUpdate();
-			res = "1";
-		} catch (SQLException e) {
-			System.out.println("SQL 에러 : " + e.getMessage());
-		} finally {
-			getConn.pstmtClose();
-		}
+      sql = "delete from boardReply where idx=?";
+      pstmt = conn.prepareStatement(sql);
+      pstmt.setInt(1, replyIdx);
+      pstmt.executeUpdate();
+      res = "1"; 
+    } catch (SQLException e) {
+       System.out.println("SQL 오류 : " + e.getMessage());
+    } finally {
+       getConn.pstmtClose();
+    }
 		return res;
+	}
+
+	// 본인이 쓴 게시글 전체 건수 구하기
+	public int getTotRecCntMember(String mid) {
+		int totRecCnt = 0;
+		try {
+			sql = "select count(idx) as cnt from board where mid = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			rs = pstmt.executeQuery();
+			rs.next();
+			totRecCnt = rs.getInt("cnt");
+		} catch (SQLException e) {
+			System.out.println("SQL 오류 : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return totRecCnt;
+	}
+
+	// 로그인 사용자가 올린 전체 게시글 가져오기
+	public ArrayList<BoardVO> getBoardSearchMember(int startIndexNo, int pageSize, String mid) {
+		ArrayList<BoardVO> vos = new ArrayList<>();
+		try {
+			sql = "select *, datediff(wDate, now()) as day_diff, timestampdiff(hour, wDate, now()) as hour_diff, "
+					+ "(select count(*) from boardReply where boardIdx=b.idx) as replyCount "
+					+ "from board b where mid = ? order by idx desc limit ?,?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			pstmt.setInt(2, startIndexNo);
+			pstmt.setInt(3, pageSize);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				vo = new BoardVO();
+				vo.setIdx(rs.getInt("idx"));
+				vo.setMid(rs.getString("mid"));
+				vo.setNickName(rs.getString("nickName"));
+				vo.setTitle(rs.getString("title"));
+				vo.setEmail(rs.getString("email"));
+				vo.setHomePage(rs.getString("homePage"));
+				vo.setContent(rs.getString("content"));
+				vo.setReadNum(rs.getInt("readNum"));
+				vo.setHostIp(rs.getString("hostIp"));
+				vo.setOpenSw(rs.getString("openSw"));
+				vo.setwDate(rs.getString("wDate"));
+				vo.setGood(rs.getInt("good"));
+				
+				vo.setHour_diff(rs.getInt("hour_diff"));
+				vo.setDay_diff(rs.getInt("day_diff"));
+				
+				vo.setreplyCount(rs.getInt("replyCount"));
+				
+				vos.add(vo);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 오류 : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return vos;
 	}
 	
 }

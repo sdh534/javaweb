@@ -23,7 +23,7 @@ public class BoardVO {
 	private String preTitle;
 	private String nextTitle;
 	
-	private int replyCount;
+	private int replyCount;		// 댓글의 개수를 저장하기위한필드
 	
 	public int getIdx() {
 		return idx;
@@ -147,7 +147,4 @@ public class BoardVO {
 				+ hour_diff + ", preIdx=" + preIdx + ", nextIdx=" + nextIdx + ", preTitle=" + preTitle + ", nextTitle="
 				+ nextTitle + ", replyCount=" + replyCount + "]";
 	}
-
-
-	
 }

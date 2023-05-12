@@ -8,6 +8,7 @@ public class BoardReplyVO {
 	private String wDate;
 	private String hostIp;
 	private String content;
+	
 	public int getIdx() {
 		return idx;
 	}
@@ -55,6 +56,4 @@ public class BoardReplyVO {
 		return "BoardReplyVO [idx=" + idx + ", boardIdx=" + boardIdx + ", mid=" + mid + ", nickName=" + nickName
 				+ ", wDate=" + wDate + ", hostIp=" + hostIp + ", content=" + content + "]";
 	}
-	
-	
 }

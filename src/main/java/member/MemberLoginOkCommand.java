@@ -24,7 +24,7 @@ public class MemberLoginOkCommand implements MemberInterface {
 		
 		MemberVO vo = dao.getMemberMidCheck(mid);
 		
-		if(vo.getSalt() == null) {
+		if(vo.getSalt() == null || vo.getUserDel().equals("OK")) {
 			request.setAttribute("msg", "회원정보가 없습니다. \\n다시 입력하세요.");
 			request.setAttribute("url", request.getContextPath()+"/MemberLogin.mem");
 			return;
@@ -41,6 +41,7 @@ public class MemberLoginOkCommand implements MemberInterface {
 			request.setAttribute("url", request.getContextPath()+"/MemberLogin.mem");
 			return;
 		}
+		
 		
 		// 로그인 성공시에 처리할 내용들을 기술한다.(1.주요필드를 세션에 저장, 2.오늘방문횟수처리, 3. 총방문수와 방문포인트처리, 4.쿠키에 아이디저장유무)
 		// 1.

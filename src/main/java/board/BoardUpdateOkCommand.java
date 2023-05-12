@@ -16,8 +16,8 @@ public class BoardUpdateOkCommand implements BoardInterface {
 		int pageSize = request.getParameter("pageSize")==null ? 0 : Integer.parseInt(request.getParameter("pageSize"));
 		
 		HttpSession session = request.getSession();
-		
 		String nickName = session.getAttribute("sNickName")==null ? "" : (String) session.getAttribute("sNickName");
+		
 		String title = request.getParameter("title")==null ? "" : request.getParameter("title");
 		String content = request.getParameter("content")==null ? "" : request.getParameter("content");
 		String email = request.getParameter("email")==null ? "" : request.getParameter("email");
@@ -35,16 +35,16 @@ public class BoardUpdateOkCommand implements BoardInterface {
 		vo.setHomePage(homePage);
 		vo.setHostIp(hostIp);
 		vo.setOpenSw(openSw);
-		
+		//System.out.println("vo : " + vo);
 		BoardDAO dao = new BoardDAO();
 		
-		int res = dao.setBoardUpdateOk(vo);	
+		int res = dao.setBoardUpdateOk(vo);
 		
 		if(res == 1) {
 			request.setAttribute("msg", "게시글이 수정되었습니다.");
 		}
 		else {
-			request.setAttribute("msg", "게시글이 수정실패~~");
+			request.setAttribute("msg", "게시글 수정실패~~");
 		}
 		request.setAttribute("url", request.getContextPath()+"/BoardContent.bo?idx="+idx+"&pag="+pag+"&pageSize="+pageSize);
 	}

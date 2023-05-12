@@ -20,8 +20,8 @@ public class BoardInputOkCommand implements BoardInterface {
 		String email = request.getParameter("email")==null ? "" : request.getParameter("email");
 		String homePage = request.getParameter("homePage")==null ? "" : request.getParameter("homePage");
 		String hostIp = request.getParameter("hostIp")==null ? "" : request.getParameter("hostIp");
-		
 		String openSw = request.getParameter("openSw")==null ? "" : request.getParameter("openSw");
+		
 		BoardVO vo = new BoardVO();
 		
 		vo.setMid(mid);

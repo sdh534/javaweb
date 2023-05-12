@@ -20,7 +20,6 @@ public class BoardContentCommand implements BoardInterface {
 		String search = request.getParameter("search")==null ? "" : request.getParameter("search");
 		String searchString = request.getParameter("searchString")==null ? "" : request.getParameter("searchString");
 		
-		
 		BoardDAO dao = new BoardDAO();
 		
 		// 글 조회수 1회 증가시키기(조회수 중복방지처리 - 세션사용 : "'board'+고유번호" 값을 객체배열(ArrayList)에 추가시킨다.)
@@ -43,14 +42,14 @@ public class BoardContentCommand implements BoardInterface {
 		request.setAttribute("pag", pag);
 		request.setAttribute("pageSize", pageSize);
 		request.setAttribute("flag", flag);
+		request.setAttribute("search", search);
+		request.setAttribute("searchString", searchString);
 		
 		// 이전글과 다음글 처리
 		BoardVO preVo = dao.getPreNextSearch(idx, "preVo");
 		BoardVO nextVo = dao.getPreNextSearch(idx, "nextVo");
 		request.setAttribute("preVo", preVo);
 		request.setAttribute("nextVo", nextVo);
-		request.setAttribute("search", search);
-		request.setAttribute("searchString", searchString);
 		
   	// 해당글에 좋아요 버튼을 클릭하였었다면 '좋아요세션'에 아이디를 저장시켜두었기에 찾아서 있다면 sSw값을 1로 보내어 하트색을 빨강색으로 변경유지하게한다.
 		ArrayList<String> goodIdx = (ArrayList) session.getAttribute("sGoodIdx");
@@ -65,18 +64,9 @@ public class BoardContentCommand implements BoardInterface {
 			session.setAttribute("sSw", "0");
 		}
 		
-		
-		//부모글에 딸려있는 댓글가져오기
+		// 현재 부모글에 따려있는 댓글 가져오기.
 		ArrayList<BoardReplyVO> replyVos = dao.getBoardReply(idx);
 		request.setAttribute("replyVos", replyVos);
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		
