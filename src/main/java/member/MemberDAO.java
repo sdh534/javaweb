@@ -359,6 +359,54 @@ public class MemberDAO {
 			System.out.println("SQL 에러 : " + e.getMessage());
 		} finally {
 			getConn.pstmtClose();
-		}			
+		}	
+	}
+
+	// 등급별로 전체자료 불러오기
+	public ArrayList<MemberVO> getMemberList(int level) {
+		ArrayList<MemberVO> vos = new ArrayList<>();
+		try {
+			sql = "select *, timestampdiff(day, lastDate, now()) as deleteDiff from member where level = ? order by idx desc";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, level);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				vo = new MemberVO();
+				vo.setIdx(rs.getInt("idx"));
+				vo.setMid(rs.getString("mid"));
+				vo.setPwd(rs.getString("pwd"));
+				vo.setNickName(rs.getString("nickName"));
+				vo.setName(rs.getString("name"));
+				vo.setGender(rs.getString("gender"));
+				vo.setBirthday(rs.getString("birthday"));
+				vo.setTel(rs.getString("tel"));
+				vo.setAddress(rs.getString("address"));
+				vo.setEmail(rs.getString("email"));
+				vo.setHomePage(rs.getString("homePage"));
+				vo.setJob(rs.getString("job"));
+				vo.setHobby(rs.getString("hobby"));
+				vo.setPhoto(rs.getString("photo"));
+				vo.setContent(rs.getString("content"));
+				vo.setUserInfor(rs.getString("userInfor"));
+				vo.setUserDel(rs.getString("userDel"));
+				vo.setPoint(rs.getInt("point"));
+				vo.setLevel(rs.getInt("level"));
+				vo.setVisitCnt(rs.getInt("visitCnt"));
+				vo.setStartDate(rs.getString("startDate"));
+				vo.setLastDate(rs.getString("lastDate"));
+				vo.setTodayCnt(rs.getInt("todayCnt"));
+				vo.setSalt(rs.getString("salt"));
+				
+				vo.setDeleteDiff(rs.getInt("deleteDiff"));
+				
+				vos.add(vo);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 에러 : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return vos;
 	}
 }
