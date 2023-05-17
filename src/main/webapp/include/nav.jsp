@@ -33,7 +33,7 @@
 	        <a class="nav-link" href="${pageContext.request.contextPath}/BoardList.bo">Board</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="#">PDS</a>
+	        <a class="nav-link" href="${ctp}/PdsList.pds">PDS</a>
 	      </li>
 	      <li>
 				  <div class="dropdown">
@@ -59,6 +59,10 @@
 				      <a class="dropdown-item" href="${ctp}/FileUpload2.st">멀티 파일 업로드 연습</a>
 				      <a class="dropdown-item" href="${ctp}/FileUpload3.st">멀티 파일 업로드 연습2</a>
 				      <a class="dropdown-item" href="${ctp}/FileUpLoad4.st">멀티 파일 업로드 연습3</a>
+				        <a class="dropdown-item" href="${ctp}/ModalTest1.st">Modal연습1</a>
+			          <a class="dropdown-item" href="${ctp}/ModalTest2.st">Modal연습2</a>
+			          <a class="dropdown-item" href="${ctp}/Calendar.st">Calendar연습</a>
+			          <a class="dropdown-item" href="${ctp}/Calendar2.st">달력연습2</a>
 				    </div>
 				  </div>  
 	      </li>   
@@ -67,6 +71,7 @@
 				    <button type="button" class="btn text-light dropdown-toggle" data-toggle="dropdown">My page</button>
 				    <div class="dropdown-menu">
 				      <a class="dropdown-item" href="${ctp}/MemberMain.mem">회원메인</a>
+				      <a class="dropdown-item" href="${ctp}/schedule/ScheduleList.sc">스케줄관리</a>
 				      <a class="dropdown-item" href="${ctp}/MemberPwdUpdate.mem">비밀번호 변경</a>
 				      <a class="dropdown-item" href="${ctp}/MemberPwdCheckForm.mem">회원정보수정</a>
 				      <c:if test="${sLevel!=1}"><a class="dropdown-item" href="${ctp}/MemberList.mem">회원리스트</a></c:if>

@@ -139,8 +139,24 @@ public class StudyController extends HttpServlet {
 			command.execute(request, response);
 			return;
 		}
-		
-		
+		else if(com.equals("/ModalTest1")){
+			viewPage += "/modal/modalTest1.jsp";
+		}
+		else if(com.equals("/ModalTest2")){
+			command = new ModalTest2Command();
+			command.execute(request, response);
+			viewPage += "/modal/modalTest2.jsp";
+		}
+		else if(com.equals("/Calendar")){
+			command = new CalendarCommand();
+			command.execute(request, response);
+			viewPage += "/calendar/calendar.jsp";
+		}
+		else if(com.equals("/Calendar2")){
+			command = new Calendar2Commond();
+			command.execute(request, response);
+			viewPage += "/calendar/calendar2.jsp";
+		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);
 	}
